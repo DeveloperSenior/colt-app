@@ -8,7 +8,7 @@ package colt.app.model;
 import colt.app.dto.DummyDTO;
 import colt.app.properties.ColtProperties;
 import com.mysql.jdbc.Connection;
-import coll.app.net.ColtConnection;
+import colt.app.net.ColtConnection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
