@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `alertas` (
   PRIMARY KEY (`idAlerta`),
   KEY `idTipo` (`idTipo`),
   KEY `idUsuario` (`idUsuario`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `ciudades` (
   `pais` varchar(25) NOT NULL,
   `fechaCreacion` date NOT NULL,
   PRIMARY KEY (`idCiudad`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `menus` (
   PRIMARY KEY (`idMenu`),
   KEY `idRecurso` (`idRecurso`),
   KEY `idPapa` (`idPapa`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `pedidos` (
   KEY `idVehiculo` (`idVehiculo`),
   KEY `idUsuario` (`idUsuario`),
   KEY `idRuta` (`idRuta`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `perfiles` (
   `activo` char(1) NOT NULL,
   `fechaCreacion` date NOT NULL,
   PRIMARY KEY (`idPerfil`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `perfilesxusuarios` (
   `idPerfil` int(11) DEFAULT NULL,
   KEY `idUsuario` (`idUsuario`),
   KEY `idPerfil` (`idPerfil`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `recursos` (
   `idPerfil` int(11) NOT NULL,
   PRIMARY KEY (`idRecurso`),
   KEY `idPerfil` (`idPerfil`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -164,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `rutas` (
   PRIMARY KEY (`idRuta`),
   KEY `idCiudadOrigen` (`idCiudadOrigen`),
   KEY `idCiudadDestino` (`idCiudadDestino`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -178,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `tipoalertas` (
   `descripcion` varchar(255) NOT NULL,
   `fechaCreacion` date NOT NULL,
   PRIMARY KEY (`idTipo`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `sexo` char(1) NOT NULL,
   `fechaNacimiento` date NOT NULL,
   PRIMARY KEY (`idUsuario`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -218,7 +218,7 @@ CREATE TABLE IF NOT EXISTS `vehiculos` (
   `activo` char(1) NOT NULL,
   `fechaCreacion` date NOT NULL,
   PRIMARY KEY (`idVehiculo`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
