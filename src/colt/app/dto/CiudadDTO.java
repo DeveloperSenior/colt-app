@@ -16,6 +16,17 @@ public class CiudadDTO {
     String departamento;
     String pais;
 
+    public CiudadDTO() {
+    }
+
+    public CiudadDTO(String nombre, String departamento, String pais) {
+        this.nombre = nombre;
+        this.departamento = departamento;
+        this.pais = pais;
+    }
+    
+    
+
     public int getIdCiudad() {
         return idCiudad;
     }

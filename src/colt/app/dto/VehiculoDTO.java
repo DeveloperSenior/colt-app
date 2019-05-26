@@ -18,6 +18,19 @@ public class VehiculoDTO {
     private String seguro;
     private String activo;
 
+    public VehiculoDTO() {
+    }
+    
+    public VehiculoDTO(String placa, String modelo, int capacidad, String seguro,String activo) {
+        this.placa = placa;
+        this.modelo = modelo;
+        this.capacidad = capacidad;
+        this.seguro = seguro;
+        this.activo = activo;
+    }
+    
+    
+
     public int getIdVehiculo() {
         return idVehiculo;
     }

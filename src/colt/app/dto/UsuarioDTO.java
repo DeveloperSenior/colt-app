@@ -22,7 +22,26 @@ public class UsuarioDTO implements Serializable{
     private String apellido;
     private String cedula;
     private Date fechaNacimiento;
+    private String telefono;
+    private String sexo;
 
+    public UsuarioDTO() {
+    }
+
+    public UsuarioDTO(String login, String clave, PerfilDTO perfil, String nombre, String apellido, String cedula, Date fechaNacimiento, String telefono, String sexo) {
+        this.login = login;
+        this.clave = clave;
+        this.perfil = perfil;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.cedula = cedula;
+        this.fechaNacimiento = fechaNacimiento;
+        this.telefono = telefono;
+        this.sexo = sexo;
+    }
+    
+    
+    
     public int getIdUsuario() {
         return idUsuario;
     }
@@ -86,7 +105,26 @@ public class UsuarioDTO implements Serializable{
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
     
+    public Object[] showDataTable() {
+        return new Object[]{this, cedula,nombre,apellido,sexo,telefono,fechaNacimiento};
+    }
     
     
 }

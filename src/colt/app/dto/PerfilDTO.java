@@ -53,5 +53,12 @@ public class PerfilDTO {
     public Object[] showDataTable() {
         return new Object[]{this, idPerfil,nombre,activo};
     }    
+
+    @Override
+    public String toString() {
+        return idPerfil+"-"+nombre;
+    }
+    
+    
     
 }

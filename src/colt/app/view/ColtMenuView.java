@@ -148,14 +148,29 @@ public class ColtMenuView extends javax.swing.JFrame {
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setText("Usuarios");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem3.setText("Vehiculos");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem4.setText("Ciudades");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem4);
 
         jMenuBar1.add(jMenu1);
@@ -185,6 +200,24 @@ public class ColtMenuView extends javax.swing.JFrame {
         perfiles.setVisible(true);
         this.jDesktopPane1.add(perfiles);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        ColtCiudadesView ciudades = new ColtCiudadesView(this.jDesktopPane1);
+        ciudades.setVisible(true);
+        this.jDesktopPane1.add(ciudades);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        ColtVehiculosView vehiculos = new ColtVehiculosView(this.jDesktopPane1);
+        vehiculos.setVisible(true);
+        this.jDesktopPane1.add(vehiculos);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        ColtUsuariosView usuarios = new ColtUsuariosView(this.jDesktopPane1);
+        usuarios.setVisible(true);
+        this.jDesktopPane1.add(usuarios);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     public void salir(){
         int valor = JOptionPane.showConfirmDialog(null,"Esta seguro que desea salir","Confirmación",JOptionPane.YES_NO_OPTION);

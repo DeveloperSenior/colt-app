@@ -92,9 +92,10 @@ public class CiudadMdl extends ColtConnection{
         try{
          con = getConnection();
          ps =  con.prepareStatement(propiedades.getString("CiudadMdl.consultar"));
-         ps.setString(1, "S");
-         ps.setString(2, ciudad.getNombre());
-         ps.setInt(3, ciudad.getIdCiudad());
+         ps.setString(1, ciudad.getNombre());
+        ps.setString(2, ciudad.getDepartamento());
+         ps.setString(3, ciudad.getPais());
+         ps.setInt(4, ciudad.getIdCiudad());
          rs = ps.executeQuery();
          if(rs != null){
              while(rs.next()){
