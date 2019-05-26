@@ -19,7 +19,7 @@ import java.sql.SQLException;
  */
 public class LoginMdl extends ColtConnection{
 
-    private ColtProperties propiedades;
+    final private ColtProperties propiedades;
     
     public LoginMdl() {
       super();

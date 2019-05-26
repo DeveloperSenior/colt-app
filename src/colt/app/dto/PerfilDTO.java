@@ -5,6 +5,8 @@
  */
 package colt.app.dto;
 
+import java.awt.Label;
+
 /**
  *
  * @author 
@@ -14,6 +16,15 @@ public class PerfilDTO {
     private int idPerfil;
     private String nombre;
     private String activo;
+
+    public PerfilDTO() {
+    }
+
+    public PerfilDTO(String nombre, String activo) {
+        this.nombre = nombre;
+        this.activo = activo;
+    }
+    
 
     public int getIdPerfil() {
         return idPerfil;
@@ -39,6 +50,8 @@ public class PerfilDTO {
         this.activo = activo;
     }
     
-    
+    public Object[] showDataTable() {
+        return new Object[]{this, idPerfil,nombre,activo};
+    }    
     
 }

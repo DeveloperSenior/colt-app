@@ -5,18 +5,37 @@
  */
 package colt.app.main;
 
+import colt.app.utilities.ColtLoadProcess;
 import colt.app.view.ColtLoginView;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author 
  */
 public class ColtStart {
+
+    private ColtLoadProcess screen;
+    
+    public ColtStart() {
+        init();
+        screen.run(100000);
+    }
+    
+    private void init(){
+        ImageIcon myImage = new ImageIcon(getClass().getResource("/img/colt-screen-welcome.jpg"));
+        screen = new ColtLoadProcess(myImage);
+        screen.setLocationRelativeTo(null);
+        screen.setProgresoMax(100);
+        screen.setVisible(true);
+    }
     
      /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
+        new ColtStart();
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
