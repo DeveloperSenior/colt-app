@@ -20,23 +20,23 @@ import javax.swing.JOptionPane;
 public class ColtMenuView extends javax.swing.JFrame {
 
     UsuarioDTO usuarioSesion;
-    
+
     /**
      * Creates new form ColtMenuView
      */
     public ColtMenuView() {
         initComponents();
-        setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.jDesktopPane1.setBorder(new ColtBorder("/img/colt-screen-welcome.jpg"));
         setLocationRelativeTo(null);
         this.addWindowListener(new WindowAdapter() {
 
-                @Override
-                public void windowClosing(WindowEvent e) {
-                    salir();
+            @Override
+            public void windowClosing(WindowEvent e) {
+                salir();
 
-                }
-            });
+            }
+        });
     }
 
     /**
@@ -59,6 +59,7 @@ public class ColtMenuView extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle(":.COLT Admin.:");
@@ -72,7 +73,10 @@ public class ColtMenuView extends javax.swing.JFrame {
         jPanel2.setMinimumSize(new java.awt.Dimension(299, 100));
         jPanel2.setPreferredSize(new java.awt.Dimension(299, 51));
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(231, 158, 109));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/exit-icon-black-small.png"))); // NOI18N
+        jButton1.setText("Cerrar sesión");
         jButton1.setToolTipText("Cerrar sesión");
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
@@ -91,9 +95,9 @@ public class ColtMenuView extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(lblUsuarioSesion, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
+                .addComponent(lblUsuarioSesion, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButton1))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,6 +140,7 @@ public class ColtMenuView extends javax.swing.JFrame {
         jMenuBar1.setBorderPainted(false);
 
         jMenu1.setText("Administrar");
+        jMenu1.setContentAreaFilled(false);
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Perfiles");
@@ -173,6 +178,15 @@ public class ColtMenuView extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem4);
 
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem5.setText("Rutas");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem5);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -192,7 +206,7 @@ public class ColtMenuView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       salir();
+        salir();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -219,20 +233,25 @@ public class ColtMenuView extends javax.swing.JFrame {
         this.jDesktopPane1.add(usuarios);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    public void salir(){
-        int valor = JOptionPane.showConfirmDialog(null,"Esta seguro que desea salir","Confirmación",JOptionPane.YES_NO_OPTION);
-        if(valor == JOptionPane.YES_OPTION){
-            System.exit(0);
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        ColtRutasView rutas = new ColtRutasView(this.jDesktopPane1);
+        rutas.setVisible(true);
+        this.jDesktopPane1.add(rutas);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    public void salir() {
+        int valor = JOptionPane.showConfirmDialog(null, "Esta seguro que desea salir", "Confirmación", JOptionPane.YES_NO_OPTION);
+        if (valor == JOptionPane.YES_OPTION) {
+            this.dispose();
+            new ColtLoginView().setVisible(true);
         }
     }
-    
 
     public void setUsuarioSesion(UsuarioDTO usuarioSesion) {
         this.usuarioSesion = usuarioSesion;
-        this.lblUsuarioSesion.setText(usuarioSesion.getCedula()+" - "+usuarioSesion.getNombre()+" "+usuarioSesion.getApellido());
+        this.lblUsuarioSesion.setText(usuarioSesion.getCedula() + " - " + usuarioSesion.getNombre() + " " + usuarioSesion.getApellido());
     }
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -243,6 +262,7 @@ public class ColtMenuView extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblUsuarioSesion;

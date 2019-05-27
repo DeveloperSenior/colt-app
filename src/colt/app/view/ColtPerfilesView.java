@@ -83,28 +83,48 @@ public class ColtPerfilesView extends javax.swing.JInternalFrame {
         jPanel2.setBackground(new java.awt.Color(61, 72, 85));
         jPanel2.setPreferredSize(new java.awt.Dimension(572, 51));
 
+        btnConsultar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnConsultar.setForeground(new java.awt.Color(231, 158, 109));
+        btnConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search-icon-black-small.png"))); // NOI18N
         btnConsultar.setText("Consultar");
+        btnConsultar.setBorderPainted(false);
+        btnConsultar.setContentAreaFilled(false);
         btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConsultarActionPerformed(evt);
             }
         });
 
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(231, 158, 109));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close-icon-black-small.png"))); // NOI18N
         jButton3.setText("Eliminar");
+        jButton3.setBorderPainted(false);
+        jButton3.setContentAreaFilled(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
+        jButton4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(231, 158, 109));
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save-icon-black-small.png"))); // NOI18N
         jButton4.setText("Grabar");
+        jButton4.setBorderPainted(false);
+        jButton4.setContentAreaFilled(false);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(231, 158, 109));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancel-icon-black-small.png"))); // NOI18N
         jButton2.setText("Limpiar");
+        jButton2.setBorderPainted(false);
+        jButton2.setContentAreaFilled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -116,14 +136,14 @@ public class ColtPerfilesView extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 98, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnConsultar))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,6 +271,16 @@ public class ColtPerfilesView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tbResultadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbResultadosMouseClicked
+        selected = (PerfilDTO) tbResultados.getValueAt(tbResultados.getSelectedRow(), 0);
+        txtNombrePerfil.setText(selected.getNombre());
+        ckActivo.setSelected("S".equals(selected.getActivo()));
+    }//GEN-LAST:event_tbResultadosMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        limpiar();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         final String nombre = txtNombrePerfil.getText();
         String activo = ckActivo.isSelected() ? "S" : "N";
@@ -314,19 +344,9 @@ public class ColtPerfilesView extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void tbResultadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbResultadosMouseClicked
-        selected = (PerfilDTO) tbResultados.getValueAt(tbResultados.getSelectedRow(), 0);
-        txtNombrePerfil.setText(selected.getNombre());
-        ckActivo.setSelected("S".equals(selected.getActivo()));
-    }//GEN-LAST:event_tbResultadosMouseClicked
-
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         consultarPerfiles();
     }//GEN-LAST:event_btnConsultarActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        limpiar();
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void limpiar() {
         selected = null;

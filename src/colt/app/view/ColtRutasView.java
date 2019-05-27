@@ -5,8 +5,9 @@
  */
 package colt.app.view;
 
-import colt.app.controller.VehiculoCtrl;
-import colt.app.dto.VehiculoDTO;
+import colt.app.controller.RutaCtrl;
+import colt.app.dto.CiudadDTO;
+import colt.app.dto.RutaDTO;
 import colt.app.utilities.ColtInvocationProcess;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,21 +19,21 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author user
  */
-public class ColtVehiculosView extends javax.swing.JInternalFrame {
+public class ColtRutasView extends javax.swing.JInternalFrame {
 
-    VehiculoCtrl vehiculoCtrl;
-    VehiculoDTO selected;
+    RutaCtrl rutaCtrl;
+    RutaDTO selected;
 
     /**
-     * Creates new form ColtVehiculosView
+     * Creates new form ColtRutasView
      */
-    public ColtVehiculosView(JDesktopPane escritorio) {
+    public ColtRutasView(JDesktopPane escritorio) {
         initComponents();
         java.awt.Dimension dimension = escritorio.size();
         java.awt.Dimension ventan = this.getSize();
         this.setLocation(new java.awt.Point((dimension.width - ventan.width) / 2, (dimension.height - ventan.height) / 2));
-        vehiculoCtrl = new VehiculoCtrl();
-        consultarVehiculos();
+        rutaCtrl = new RutaCtrl();
+        consultarRutas();
     }
 
     /**
@@ -54,16 +55,17 @@ public class ColtVehiculosView extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbResultados = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        txtPlaca = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        txtCapacidad = new javax.swing.JTextField();
+        txtCodigo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtModelo = new javax.swing.JTextField();
-        ckSeguro = new javax.swing.JCheckBox();
+        txtDescripcion = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        cbOrigen = new javax.swing.JComboBox<>();
+        cbDestino = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
-        setTitle(":.Vehículos.:");
+        setTitle(":.Rutas.:");
 
         jPanel1.setBackground(new java.awt.Color(231, 158, 109));
 
@@ -123,7 +125,7 @@ public class ColtVehiculosView extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 134, Short.MAX_VALUE)
                 .addComponent(btnLimpiar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnGrabar)
@@ -147,14 +149,14 @@ public class ColtVehiculosView extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "", "Id", "Placa", "Modelo", "Capacidad", "Tiene seguro"
+                "", "Código", "Descripción", "Ciudad origen", "Ciudad destino"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -178,42 +180,37 @@ public class ColtVehiculosView extends javax.swing.JInternalFrame {
             tbResultados.getColumnModel().getColumn(0).setMinWidth(0);
             tbResultados.getColumnModel().getColumn(0).setPreferredWidth(0);
             tbResultados.getColumnModel().getColumn(0).setMaxWidth(0);
-            tbResultados.getColumnModel().getColumn(1).setMinWidth(50);
-            tbResultados.getColumnModel().getColumn(1).setPreferredWidth(50);
-            tbResultados.getColumnModel().getColumn(1).setMaxWidth(50);
-            tbResultados.getColumnModel().getColumn(4).setMinWidth(60);
-            tbResultados.getColumnModel().getColumn(4).setPreferredWidth(60);
-            tbResultados.getColumnModel().getColumn(4).setMaxWidth(60);
-            tbResultados.getColumnModel().getColumn(5).setMinWidth(80);
-            tbResultados.getColumnModel().getColumn(5).setPreferredWidth(80);
-            tbResultados.getColumnModel().getColumn(5).setMaxWidth(80);
         }
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Placa: *");
+        jLabel1.setText("Código: *");
 
-        txtPlaca.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtPlaca.setSelectionColor(new java.awt.Color(231, 158, 109));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Capacidad: *");
-
-        txtCapacidad.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtCapacidad.setSelectionColor(new java.awt.Color(231, 158, 109));
+        txtCodigo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtCodigo.setSelectionColor(new java.awt.Color(231, 158, 109));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setLabelFor(txtModelo);
-        jLabel3.setText("Modelo: *");
+        jLabel3.setText("Descripción: *");
 
-        txtModelo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtModelo.setSelectionColor(new java.awt.Color(231, 158, 109));
+        txtDescripcion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtDescripcion.setSelectionColor(new java.awt.Color(231, 158, 109));
 
-        ckSeguro.setForeground(new java.awt.Color(255, 255, 255));
-        ckSeguro.setText("Tiene seguro");
-        ckSeguro.setContentAreaFilled(false);
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Ciudad Origen: *");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Ciudad Destino: *");
+
+        cbOrigen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Seleccione-" }));
+        cbOrigen.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(231, 158, 109), 1, true));
+        cbOrigen.setOpaque(false);
+
+        cbDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Seleccione-" }));
+        cbDestino.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(231, 158, 109), 1, true));
+        cbDestino.setOpaque(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -222,24 +219,25 @@ public class ColtVehiculosView extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(txtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(43, 43, 43)
-                                .addComponent(ckSeguro))
+                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(cbDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -248,14 +246,15 @@ public class ColtVehiculosView extends javax.swing.JInternalFrame {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ckSeguro))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -265,7 +264,7 @@ public class ColtVehiculosView extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -291,22 +290,22 @@ public class ColtVehiculosView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        consultarVehiculos();
+        consultarRutas();
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         if (selected != null) {
-            int valor = JOptionPane.showConfirmDialog(null, "Esta seguro que desea eliminar la vehiculo", "Confirmación", JOptionPane.YES_NO_OPTION);
+            int valor = JOptionPane.showConfirmDialog(null, "Esta seguro que desea eliminar la ruta", "Confirmación", JOptionPane.YES_NO_OPTION);
             if (valor == JOptionPane.YES_OPTION) {
                 new ColtInvocationProcess(() -> {
                     try {
-                        vehiculoCtrl.eliminar(selected);
+                        rutaCtrl.eliminar(selected);
                     } catch (SQLException ex) {
-                        JOptionPane.showMessageDialog(this, "Error al eliminar la vehiculo\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Error al eliminar la ruta\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }, () -> {
                     limpiar();
-                    consultarVehiculos();
+                    consultarRutas();
                 }).invoke();
             }
         } else {
@@ -315,59 +314,58 @@ public class ColtVehiculosView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
-        final String placa = txtPlaca.getText();
-        final String modelo = txtModelo.getText();
-        int cap;
+        final String codigo = txtCodigo.getText();
+        final String descripcion = txtDescripcion.getText();
+        CiudadDTO or,des;
         try {
-            cap = Integer.parseInt(txtCapacidad.getText());
-        } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(this, "Ingrese la capacidad", "Validación", JOptionPane.WARNING_MESSAGE);
-            return;
+            or = (CiudadDTO)cbOrigen.getSelectedItem();
+            des = (CiudadDTO) cbDestino.getSelectedItem();
+        } catch (Exception ex) {
+           JOptionPane.showMessageDialog(this, "Ingrese la ciudad origen y destino de la ruta", "Validación", JOptionPane.WARNING_MESSAGE);
+           return;
         }
-        final int capacidad = cap;
-        final String seguro = ckSeguro.isSelected() ? "S" : "N";
+        final CiudadDTO origen = or,destino = des; 
         if (selected == null) {
-            if ("".equals(placa)) {
-                JOptionPane.showMessageDialog(this, "Ingrese la placa", "Validación", JOptionPane.WARNING_MESSAGE);
+            if ("".equals(codigo)) {
+                JOptionPane.showMessageDialog(this, "Ingrese el código", "Validación", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
-            if ("".equals(modelo)) {
-                JOptionPane.showMessageDialog(this, "Ingrese el modelo", "Validación", JOptionPane.WARNING_MESSAGE);
+            if ("".equals(descripcion)) {
+                JOptionPane.showMessageDialog(this, "Ingrese la descripción", "Validación", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
             new ColtInvocationProcess(() -> {
-                VehiculoDTO vehiculo = new VehiculoDTO(placa, modelo, capacidad, seguro, "S");
+                RutaDTO ruta = new RutaDTO(descripcion, codigo, origen, destino);
                 try {
-                    vehiculo = vehiculoCtrl.grabarVehiculo(vehiculo);
-                    if (vehiculo != null) {
+                    ruta = rutaCtrl.grabarRuta(ruta);
+                    if (ruta != null) {
                         JOptionPane.showMessageDialog(null, "Registro almacenado correctamente");
                     }
                 } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(this, "Error al crear la vehiculo\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Error al crear la ruta\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }, () -> {
                 limpiar();
-                consultarVehiculos();
+                consultarRutas();
             }).invoke();
         } else {
-            selected.setPlaca(placa);
-            selected.setModelo(modelo);
-            selected.setCapacidad(capacidad);
-            selected.setSeguro(seguro);
+            selected.setDescripcion(descripcion);
+            selected.setOrigen(origen);
+            selected.setDestino(destino);
             new ColtInvocationProcess(() -> {
                 try {
-                    VehiculoDTO vehiculo = vehiculoCtrl.actualizarVehiculo(selected);
-                    if (vehiculo != null) {
+                    RutaDTO ruta = rutaCtrl.actualizarRuta(selected);
+                    if (ruta != null) {
                         JOptionPane.showMessageDialog(null, "Registro actualizado correctamente");
                     }
                 } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(this, "Error al actualizar el vehiculo\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Error al actualizar la ruta\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }, () -> {
                 limpiar();
-                consultarVehiculos();
+                consultarRutas();
             }).invoke();
         }
     }//GEN-LAST:event_btnGrabarActionPerformed
@@ -377,46 +375,39 @@ public class ColtVehiculosView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void tbResultadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbResultadosMouseClicked
-        selected = (VehiculoDTO) tbResultados.getValueAt(tbResultados.getSelectedRow(), 0);
-        txtPlaca.setText(selected.getPlaca());
-        txtModelo.setText(selected.getModelo());
-        txtCapacidad.setText(selected.getCapacidad() + "");
-        ckSeguro.setSelected("S".equals(selected.getSeguro()));
+        selected = (RutaDTO) tbResultados.getValueAt(tbResultados.getSelectedRow(), 0);
+        txtCodigo.setText(selected.getCodigo());
+        txtDescripcion.setText(selected.getDescripcion());
+        cbOrigen.setSelectedItem(selected.getOrigen());
+        cbDestino.setSelectedItem(selected.getDestino());
     }//GEN-LAST:event_tbResultadosMouseClicked
 
     private void limpiar() {
         selected = null;
-        txtPlaca.setText("");
-        txtModelo.setText("");
-        txtCapacidad.setText("");
-        ckSeguro.setSelected(false);
+        txtCodigo.setText("");
+        txtDescripcion.setText("");
+        cbOrigen.setSelectedIndex(0);
+        cbDestino.setSelectedIndex(0);
     }
 
-    private void consultarVehiculos() {
-        final String placa = txtPlaca.getText();
-        final String modelo = txtModelo.getText();
-        int cap;
-        try {
-            cap = Integer.parseInt(txtCapacidad.getText());
-        } catch (NumberFormatException nfe) {
-            cap = 1;
-        }
-        final int capacidad = cap;
-        final String seguro = ckSeguro.isSelected() ? "S" : "N";
+    private void consultarRutas() {
+        final String codigo = txtCodigo.getText();
         new ColtInvocationProcess(() -> {
             try {
-                ArrayList<VehiculoDTO> vehiculoes = vehiculoCtrl.consultar(new VehiculoDTO(placa, modelo, capacidad, seguro, "S"));
+                RutaDTO rutaFiltro = new RutaDTO();
+                rutaFiltro.setCodigo(codigo);
+                ArrayList<RutaDTO> rutaes = rutaCtrl.consultar(rutaFiltro);
                 tbResultados.removeAll();
                 tbResultados.repaint();
                 DefaultTableModel model = (DefaultTableModel) tbResultados.getModel();
                 model.getDataVector().removeAllElements();
                 model.fireTableDataChanged();
-                for (VehiculoDTO vehiculo : vehiculoes) {
-                    model.addRow(vehiculo.showDataTable());
+                for (RutaDTO ruta : rutaes) {
+                    model.addRow(ruta.showDataTable());
                 }
                 tbResultados.repaint();
             } catch (Throwable ex) {
-                JOptionPane.showMessageDialog(this, "Error al consultar los vehiculos\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error al consultar las rutas\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }).invoke();
     }
@@ -426,17 +417,18 @@ public class ColtVehiculosView extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGrabar;
     private javax.swing.JButton btnLimpiar;
-    private javax.swing.JCheckBox ckSeguro;
+    private javax.swing.JComboBox<String> cbDestino;
+    private javax.swing.JComboBox<String> cbOrigen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbResultados;
-    private javax.swing.JTextField txtCapacidad;
-    private javax.swing.JTextField txtModelo;
-    private javax.swing.JTextField txtPlaca;
+    private javax.swing.JTextField txtCodigo;
+    private javax.swing.JTextField txtDescripcion;
     // End of variables declaration//GEN-END:variables
 }

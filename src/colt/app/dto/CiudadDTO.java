@@ -59,11 +59,13 @@ public class CiudadDTO {
         this.pais = pais;
     }
     
-    
-    
-    
     public Object[] showDataTable() {
         return new Object[]{this, idCiudad,nombre,departamento,pais};
-    }  
+    }
+
+    @Override
+    public String toString() {
+        return idCiudad+"-"+nombre;
+    }
     
 }

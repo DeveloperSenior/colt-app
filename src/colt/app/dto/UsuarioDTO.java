@@ -123,8 +123,7 @@ public class UsuarioDTO implements Serializable{
     }
     
     public Object[] showDataTable() {
-        return new Object[]{this, cedula,nombre,apellido,sexo,telefono,fechaNacimiento};
+        return new Object[]{this, cedula,nombre,apellido,telefono,sexo,fechaNacimiento};
     }
-    
     
 }

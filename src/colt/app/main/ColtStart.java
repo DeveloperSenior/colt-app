@@ -19,7 +19,7 @@ public class ColtStart {
     
     public ColtStart() {
         init();
-        screen.run(100000);
+        screen.run(1000000);
     }
     
     private void init(){

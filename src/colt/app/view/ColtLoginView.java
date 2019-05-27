@@ -8,6 +8,7 @@ package colt.app.view;
 import colt.app.controller.LoginCtrl;
 import colt.app.dto.UsuarioDTO;
 import colt.app.utilities.ColtInvocationProcess;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -87,6 +88,11 @@ public class ColtLoginView extends javax.swing.JFrame {
         txtClave.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtClave.setPreferredSize(new java.awt.Dimension(6, 23));
         txtClave.setSelectionColor(new java.awt.Color(231, 158, 109));
+        txtClave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtClaveKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -117,7 +123,10 @@ public class ColtLoginView extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(61, 72, 85));
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(231, 158, 109));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/exit-icon-black-small.png"))); // NOI18N
+        jButton1.setText("Cerrar");
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -126,7 +135,10 @@ public class ColtLoginView extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(231, 158, 109));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/login-icon-black-small.png"))); // NOI18N
+        jButton2.setText("Ingresar");
         jButton2.setBorderPainted(false);
         jButton2.setContentAreaFilled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -140,10 +152,10 @@ public class ColtLoginView extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 185, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 69, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,6 +200,17 @@ public class ColtLoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        login();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtClaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClaveKeyPressed
+       if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+           login();
+       }
+    }//GEN-LAST:event_txtClaveKeyPressed
+
+    
+    private void login(){
         String usuario = txtUsuario.getText();
         String clave =  new String(txtClave.getPassword());
         
@@ -209,11 +232,11 @@ public class ColtLoginView extends javax.swing.JFrame {
             try {
                 UsuarioDTO respuesta = ctrl.login(login);
                 if (respuesta != null && respuesta.getIdUsuario() != 0) {
+                    ColtLoginView.this.dispose();
                     JOptionPane.showMessageDialog(null, "Bienvenido: " + respuesta.getNombre() + " " + respuesta.getApellido());
                     ColtMenuView menu = new ColtMenuView();
                     menu.setVisible(true);
                     menu.setUsuarioSesion(respuesta);
-                    ColtLoginView.this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "El usuario no existe","Error",JOptionPane.ERROR_MESSAGE);
                 }
@@ -221,11 +244,7 @@ public class ColtLoginView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             }
         }).invoke();
-        
-        
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
-
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
